@@ -144,26 +144,35 @@ public class SIGTA {
                     }
                     break;
 
-                case 5:
+                    case 5:
                     if (itemcount > 0) {
-                        System.out.println("Pilih nomor transaksi yang ingin dihapus:");
+                        System.out.println("Pilih nomor transaksi yang ingin diubah:");
                         int nomorTransaksi = sig.nextInt();
-
+                
                         if (nomorTransaksi > 0 && nomorTransaksi <= itemcount) {
-                            System.out.println("Data Barang pada transaksi ke-" + nomorTransaksi + " berhasil dihapus");
-                            for (int i = nomorTransaksi - 1; i < itemcount - 1; i++) {
-                                for (int r = 0; r < pemasukan[0][i + 1]; r++) {
-                                    namaBarang[i][r] = namaBarang[i + 1][r];
+                            System.out.println("Data Barang pada transaksi ke-" + nomorTransaksi + ":");
+                            for (int r = 0; r < pemasukan[0][nomorTransaksi - 1]; r++) {
+                                System.out.println((r + 1) + ". Nama Barang: " + namaBarang[nomorTransaksi - 1][r] + " - Jumlah: " + pemasukan[1][nomorTransaksi - 1]);
+                            }
+                
+                            // Pilih nomor barang yang ingin diubah jumlahnya
+                            System.out.println("Pilih nomor barang yang ingin diubah jumlahnya:");
+                            int nomorBarang = sig.nextInt();
+                
+                            if (nomorBarang > 0 && nomorBarang <= pemasukan[0][nomorTransaksi - 1]) {
+                                System.out.println("Masukkan jumlah baru untuk barang " + namaBarang[nomorTransaksi - 1][nomorBarang - 1] + ":");
+                                int jumlahBaru = sig.nextInt();
+                
+                                if (jumlahBaru >= 0) {
+                                    // Ubah jumlah barang
+                                    pemasukan[1][nomorTransaksi - 1] = jumlahBaru;
+                                    System.out.println("Jumlah barang berhasil diubah menjadi " + jumlahBaru);
+                                } else {
+                                    System.out.println("Jumlah barang baru tidak valid");
                                 }
-                                pemasukan[0][i] = pemasukan[0][i + 1];
-                                pemasukan[1][i] = pemasukan[1][i + 1];
+                            } else {
+                                System.out.println("Nomor barang tidak valid");
                             }
-                            for (int r = 0; r < pemasukan[0][itemcount - 1]; r++) {
-                                namaBarang[itemcount - 1][r] = null;
-                            }
-                            pemasukan[0][itemcount - 1] = 0;
-                            pemasukan[1][itemcount - 1] = 0;
-                            itemcount--;
                         } else {
                             System.out.println("Nomor transaksi tidak valid");
                         }
@@ -171,7 +180,7 @@ public class SIGTA {
                         System.out.println("Belum ada data barang yang dimasukkan");
                     }
                     break;
-
+                    
                 case 6:
                     System.out.println(" ");
                     System.out.println("Anda telah logout dari sistem !");
