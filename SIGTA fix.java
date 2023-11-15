@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class SIGTA {
+public class SIGTAfix {
  public static void main(String[] args) {
     Scanner sig = new Scanner(System.in);
     Scanner sig1 = new Scanner(System.in);
