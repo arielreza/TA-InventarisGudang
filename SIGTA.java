@@ -1,7 +1,6 @@
 import java.util.Scanner;
-import java.util.Arrays;
 
-public class SIGTA{
+public class SIGTA {
     public static void main(String[] args) {
         Scanner sig = new Scanner(System.in);
         int user = 0;
@@ -21,15 +20,16 @@ public class SIGTA{
             System.out.println("|2. LOGIN PENGGUNA                                          |");
             System.out.println("|3. Input data barang di Gudang                             |");
             System.out.println("|4. Display data barang di Gudang                           |");
-            System.out.println("|5. LOGOUT                                                  |");
-            System.out.println("|6. KELUAR                                                  |");
+            System.out.println("|5. Penghapusan Transaksi                                   |");
+            System.out.println("|6. LOGOUT                                                  |");
+            System.out.println("|7. KELUAR                                                  |");
 
             System.out.println("Pilih Menu :");
             int pilih = sig.nextInt();
             sig.nextLine();
 
             // Tambahkan kondisi untuk memastikan pengguna harus login setelah logout
-            if (!loginuser && pilih >= 3 && pilih <= 6) {
+            if (!loginuser && pilih >= 3 && pilih <= 7) {
                 System.out.println(" ");
                 System.out.println("Anda harus login terlebih dahulu !");
                 System.out.println(" ");
@@ -107,13 +107,13 @@ public class SIGTA{
                             for (int r = 0; r < pemasukan[0][itemcount]; r++) {
                                 System.out.println("Barang ke-" + (r + 1));
                                 System.out.println("Masukan nama barang:");
-                                namaBarang[itemcount][r] = sig.next(); // Memperbarui nama barang sesuai dengan transaksi saat ini
+                                namaBarang[itemcount][r] = sig.next();
                                 System.out.println("Masukan jumlah barang");
                                 pemasukan[1][itemcount] = sig.nextInt();
                             }
-                            System.out.println("barang berhasil ditambah");
+                            System.out.println("Barang berhasil ditambah");
                             itemcount++;
-                            System.out.println("apakah ada barang yang ingin anda tambahkan? (y/n)");
+                            System.out.println("Apakah ada barang yang ingin anda tambahkan? (y/n)");
                             char newData = sig.next().charAt(0);
                             if (newData != 'y') {
                                 dataBaru = true;
@@ -145,17 +145,46 @@ public class SIGTA{
                     break;
 
                 case 5:
+                    if (itemcount > 0) {
+                        System.out.println("Pilih nomor transaksi yang ingin dihapus:");
+                        int nomorTransaksi = sig.nextInt();
+
+                        if (nomorTransaksi > 0 && nomorTransaksi <= itemcount) {
+                            System.out.println("Data Barang pada transaksi ke-" + nomorTransaksi + " berhasil dihapus");
+                            for (int i = nomorTransaksi - 1; i < itemcount - 1; i++) {
+                                for (int r = 0; r < pemasukan[0][i + 1]; r++) {
+                                    namaBarang[i][r] = namaBarang[i + 1][r];
+                                }
+                                pemasukan[0][i] = pemasukan[0][i + 1];
+                                pemasukan[1][i] = pemasukan[1][i + 1];
+                            }
+                            for (int r = 0; r < pemasukan[0][itemcount - 1]; r++) {
+                                namaBarang[itemcount - 1][r] = null;
+                            }
+                            pemasukan[0][itemcount - 1] = 0;
+                            pemasukan[1][itemcount - 1] = 0;
+                            itemcount--;
+                        } else {
+                            System.out.println("Nomor transaksi tidak valid");
+                        }
+                    } else {
+                        System.out.println("Belum ada data barang yang dimasukkan");
+                    }
+                    break;
+
+                case 6:
                     System.out.println(" ");
                     System.out.println("Anda telah logout dari sistem !");
                     System.out.println(" ");
                     loginuser = false; // Setelah logout, reset nilai loginuser menjadi false
                     break;
 
-                case 6:
+                case 7:
                     System.out.println(" ");
                     System.out.println("Anda berhasil keluar");
                     System.out.println(" ");
                     System.exit(0);
+                    break;
 
                 default:
                     System.out.println("Pilihan anda tidak valid, silahkan coba lagi !");
