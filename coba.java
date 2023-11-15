@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.Arrays;
 
-public class SIGTA {
+public class coba {
     public static void main(String[] args) {
         Scanner sig = new Scanner (System.in);
         int user=0;
