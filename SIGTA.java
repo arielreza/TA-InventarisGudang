@@ -59,7 +59,6 @@ public class SIGTA {
             if (user==0){
                 System.out.println(" ");
                 System.out.println("Maaf anda belum daftar, Silahkan daftar terlebih dahulu!");
-                System.out.println(" ");
             }else{
             System.out.println("|===========================================================|");
             System.out.println("|                       LOGIN PENGGUNA                      |");
