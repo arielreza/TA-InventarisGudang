@@ -88,45 +88,52 @@ public class SIGTA {
             break;
 
             case 3:
-            if (user==0){
+            if (user == 0) {
                 System.out.println(" ");
                 System.out.println("Maaf anda belum daftar, Silahkan daftar terlebih dahulu!");
                 System.out.println(" ");
-            }else{
-                if (!loginuser){
+            } else {
+                if (!loginuser) {
                     System.out.println(" ");
                     System.out.println("Maaf, Anda harus login terlebih dahulu !");
                     System.out.println(" ");
                     break;
                 }
-            boolean dataBaru = false;
-            while (!dataBaru) {
-                System.out.println("|=======================================|");
-                System.out.println("|      INPUT DATA BARANG DI GUDANG      |");
-                System.out.println("|=======================================|");
-                System.out.println("|Jumlah barang yang akan dimasukkan:    |");
-            int jumlahBarang = sig.nextInt();
-            for (int r = 0; r < jumlahBarang; r++) {
-                System.out.println("|---------------------------------------|");
-                System.out.println("|Barang ke-" + (r + 1)+"                 ");
-                System.out.println("|---------------------------------------|");
-                System.out.println("|Masukan nama barang               :    |");
-                namaBarang[itemcount][r]=sig.next();
-                System.out.println("|Masukan jumlah barang             :    |");
-                System.out.println("|=======================================|");
-                pemasukan[1][itemcount] += sig.nextInt();
-                sig.nextLine();
+        
+                boolean dataBaru = false;
+                while (!dataBaru) {
+                    System.out.println("|=======================================|");
+                    System.out.println("|      INPUT DATA BARANG DI GUDANG      |");
+                    System.out.println("|=======================================|");
+                    System.out.println("|Jumlah barang yang akan dimasukkan:    |");
+                    int jumlahBarang = sig.nextInt();
+                    sig.nextLine(); // Membersihkan input buffer
+        
+                    for (int r = 0; r < jumlahBarang; r++) {
+                        System.out.println("|---------------------------------------|");
+                        System.out.println("|Barang ke-" + (r + 1) + "                 ");
+                        System.out.println("|---------------------------------------|");
+                        System.out.println("|Masukan nama barang               :    |");
+                        namaBarang[itemcount][r] = sig.nextLine(); // Menggunakan nextLine untuk nama barang
+                        System.out.println("|Masukan jumlah barang             :    |");
+                        pemasukan[1][itemcount] = sig.nextInt(); // Mengambil jumlah barang yang benar
+                        sig.nextLine(); // Membersihkan input buffer
+                        System.out.println("|=======================================|");
+                    }
+        
+                    System.out.println("Barang berhasil ditambah");
+                    pemasukan[0][itemcount] = jumlahBarang;
+                    itemcount++;
+                    
+                    System.out.println("Apakah ada barang yang ingin anda tambahkan? (y/n)");
+                    char newData = sig.next().charAt(0);
+                    if (newData != 'y') {
+                        dataBaru = true;
+                    }
+                }
             }
-                System.out.println("Barang berhasil ditambah");
-            pemasukan[0][itemcount] = jumlahBarang;
-            itemcount++;
-            System.out.println("apakah ada barang yang ingin anada tambahkan? (y/n)");
-            char newData = sig.next().charAt(0);
-            if (newData != 'y'){
-                dataBaru = true;
-        }
-    }}         
             break;
+        
 
             case 4:
             if (user==0){
