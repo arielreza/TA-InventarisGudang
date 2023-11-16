@@ -6,6 +6,7 @@ public class SIGTA {
         Scanner sig = new Scanner (System.in);
         int user=0;
         boolean loginuser = false;
+        boolean logoutuser = false;
         String[][]userGudang = new String[10][2]; // menggunakan array 2 dimensi untuk membatasi pengguna yang mendaftar
         String[][] namaBarang = new String[10][10];
         int pemasukan[][] = new int[2][10]; // menghitung jumlah transaksi
@@ -77,6 +78,7 @@ public class SIGTA {
                     System.out.println(" ");
                     userFound=true;
                     loginuser=true;
+                    logoutuser=true;
                     break;
                 }
             }
@@ -97,9 +99,14 @@ public class SIGTA {
                     System.out.println(" ");
                     System.out.println("Maaf, Anda harus login terlebih dahulu !");
                     System.out.println(" ");
-                    break;
-                }
-        
+                
+            }else{
+                if (!logoutuser){
+                System.out.println(" ");
+                System.out.println("Anda sudah logout, silahkan login terlebih dahulu ! !");
+                System.out.println(" ");
+            break;
+            }
                 boolean dataBaru = false;
                 while (!dataBaru) {
                     System.out.println("|=======================================|");
@@ -131,7 +138,7 @@ public class SIGTA {
                         dataBaru = true;
                     }
                 }
-            }
+            }}
             break;
         
 
@@ -145,8 +152,13 @@ public class SIGTA {
                     System.out.println(" ");
                     System.out.println("Maaf, Anda harus login terlebih dahulu !");
                     System.out.println(" ");
-                    break;
-                }
+            }else{
+                if (!logoutuser){
+                System.out.println(" ");
+                System.out.println("Anda sudah logout, silahkan login terlebih dahulu ! !");
+                System.out.println(" ");
+            break;
+            }
                 System.out.println(" ");
                 System.out.println("=======================================");
                 System.out.println("       DISPLAY BARANG DI GUDANG        ");
@@ -163,7 +175,7 @@ public class SIGTA {
                     }
                 System.out.println("---------------------------------------");
                 System.out.println(" ");
-                }}
+                }}}
                 break;
 
                 case 5:
@@ -176,8 +188,13 @@ public class SIGTA {
                     System.out.println(" ");
                     System.out.println("Maaf, Anda harus login terlebih dahulu !");
                     System.out.println(" ");
-                    break;
-                }
+                }else{
+                if (!logoutuser){
+                System.out.println(" ");
+                System.out.println("Anda sudah logout, silahkan login terlebih dahulu ! !");
+                System.out.println(" ");
+                break;
+            }
                     if (itemcount > 0) {
                 System.out.println(" ");
                 System.out.println("================================================");
@@ -222,7 +239,7 @@ public class SIGTA {
                     }
                 } else {
                     System.out.println("Belum ada data barang yang dimasukkan");
-                }}
+                }}}
                 break;
             
 
@@ -230,6 +247,7 @@ public class SIGTA {
             System.out.println(" ");
             System.out.println("Anda telah logout dari sistem !");
             System.out.println(" ");
+            logoutuser=false;
             break;
 
             case 7:
