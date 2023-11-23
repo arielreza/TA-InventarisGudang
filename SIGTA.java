@@ -123,7 +123,7 @@ public class SIGTA {
                                     System.out.println(  "|Barang ke-" + (r + 1) + "              | ");
                                     System.out.println("|---------------------------------------| ");
                                     System.out.println("|Masukan nama barang      :             | ");
-                                    namaBarang[itemcount][r] = sig.nextLine(); // Menggunakan nextLine untuk nama barang
+                                    namaBarang[r] = sig.nextLine(); // Menggunakan nextLine untuk nama barang
                                     System.out.println("|Masukan jumlah barang    :             |");
                                     pemasukan[1][itemcount] = sig.nextInt(); // Mengambil jumlah barang yang benar
                                     sig.nextLine(); // Membersihkan input buffer
@@ -173,7 +173,7 @@ public class SIGTA {
                                 System.out.println("Transaksi ke-" + (i + 1));
                                 System.out.println("---------------------------------------");
                                 for (int r = 0; r < pemasukan[0][i]; r++) {
-                                    System.out.println("Nama Barang  : " + namaBarang[i][r]);
+                                    System.out.println("Nama Barang  : " + namaBarang[r]);
                                     System.out.println("Jumlah       : " + pemasukan[1][i]);
                                 }
                                 System.out.println("---------------------------------------");
@@ -214,7 +214,7 @@ public class SIGTA {
                                     System.out.println("------------------------------------------------");
                                     for (int r = 0; r < pemasukan[0][nomorTransaksi - 1]; r++) {
                                         System.out.println(
-                                                (r + 1) + ". Nama Barang: " + namaBarang[nomorTransaksi - 1][r]);
+                                                (r + 1) + ". Nama Barang: " + namaBarang[r]);
                                         System.out.println("Jumlah: " + pemasukan[1][nomorTransaksi - 1]);
                                     }
 
@@ -226,7 +226,7 @@ public class SIGTA {
                                     if (nomorBarang > 0 && nomorBarang <= pemasukan[0][nomorTransaksi - 1]) {
                                         System.out.println("------------------------------------------------");
                                         System.out.println("Masukkan jumlah baru untuk barang "
-                                                + namaBarang[nomorTransaksi - 1][nomorBarang - 1] + ":");
+                                                + namaBarang[nomorBarang - 1] + ":");
                                         int jumlahBaru = sig.nextInt();
 
                                         if (jumlahBaru >= 0) {
