@@ -107,8 +107,8 @@ public class SIGTA {
                 System.out.println(" ");
             break;
             }
-                boolean dataBaru = false;
-                while (!dataBaru) {
+                boolean dataBaru = true;
+                while (dataBaru) {
                     System.out.println("|=======================================|");
                     System.out.println("|      INPUT DATA BARANG DI GUDANG      |");
                     System.out.println("|=======================================|");
@@ -117,10 +117,10 @@ public class SIGTA {
                     sig.nextLine(); // Membersihkan input buffer
         
                     for (int r = 0; r < jumlahBarang; r++) {
-                        System.out.println("|---------------------------------------|");
-                        System.out.println("|Barang ke-" + (r + 1) + "                 ");
-                        System.out.println("|---------------------------------------|");
-                        System.out.println("|Masukan nama barang               :    |");
+                        System.out.println("|---------------------------------------| ");
+                        System.out.println(  "|Barang ke-" + (r + 1) + "              | ");
+                        System.out.println("|---------------------------------------| ");
+                        System.out.println("|Masukan nama barang               :    | ");
                         namaBarang[itemcount][r] = sig.nextLine(); // Menggunakan nextLine untuk nama barang
                         System.out.println("|Masukan jumlah barang             :    |");
                         pemasukan[1][itemcount] = sig.nextInt(); // Mengambil jumlah barang yang benar
@@ -128,17 +128,18 @@ public class SIGTA {
                         System.out.println("|=======================================|");
                     }
         
-                    System.out.println("Barang berhasil ditambah");
+                    System.out.println("Barang Berhasil Ditambah");
                     pemasukan[0][itemcount] = jumlahBarang;
                     itemcount++;
                     
                     System.out.println("Apakah ada barang yang ingin anda tambahkan? (y/n)");
                     char newData = sig.next().charAt(0);
-                    if (newData != 'y') {
-                        dataBaru = true;
+                    if (newData == 'n') {
+                        dataBaru = false;
                     }
                 }
-            }}
+            }
+        }
             break;
         
 
