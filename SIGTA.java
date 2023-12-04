@@ -1,17 +1,16 @@
 import java.util.Scanner;
-import java.util.Arrays;
 
 public class SIGTA {
     public static void main(String[] args) {
         Scanner sig = new Scanner(System.in);
         int user = 0;
-        int brg = 0;
+        boolean registrationCompleted = false;
         boolean loginuser = false;
         boolean logoutuser = false;
-        String[][] userGudang = new String[10][2]; // menggunakan array 2 dimensi untuk membatasi pengguna yang mendaftar
-        String[]namaBarang = new String[10];
-        int pemasukan[][] = new int[2][10]; // menghitung jumlah transaksi
-        int itemcount = 0; // int items
+        String[][] userGudang = new String[10][2];
+        String[] namaBarang = new String[10];
+        int pemasukan[][] = new int[2][10];
+        int itemcount = 0;
 
         while (true) {
             System.out.println("|===========================================================|");
@@ -19,8 +18,12 @@ public class SIGTA {
             System.out.println("|===========================================================|");
             System.out.println("| Silahkan Pilih Menu :                                     |");
             System.out.println("|----------------------                                     |");
-            System.out.println("|1. DAFTAR PENGGUNA                                         |");
-            System.out.println("|2. LOGIN PENGGUNA                                          |");
+            if (!registrationCompleted) {
+                System.out.println("|1. DAFTAR PENGGUNA                                         |");
+            }
+            if (!loginuser) {
+                System.out.println("|2. LOGIN PENGGUNA                                          |");
+            }
             System.out.println("|3. Input data barang di Gudang                             |");
             System.out.println("|4. Display data barang di Gudang                           |");
             System.out.println("|5. Update Transaksi                                        |");
@@ -34,26 +37,31 @@ public class SIGTA {
 
             switch (pilih) {
                 case 1:
-                    System.out.println(" ");
-                    System.out.println("|===========================================================|");
-                    System.out.println("|                      DAFTAR PENGGUNA                      |");
-                    System.out.println("|===========================================================|");
-                    System.out.println("|Masukkan username :                                        |");
-                    String username = sig.nextLine();
-                    System.out.println("|Masukkan password :                                        |");
-                    String password = sig.nextLine();
-                    System.out.println("|===========================================================|");
-                    System.out.println(" ");
+                    if (!registrationCompleted) {
+                        System.out.println(" ");
+                        System.out.println("|===========================================================|");
+                        System.out.println("|                      DAFTAR PENGGUNA                      |");
+                        System.out.println("|===========================================================|");
+                        System.out.println("|Masukkan username :                                        |");
+                        String username = sig.nextLine();
+                        System.out.println("|Masukkan password :                                        |");
+                        String password = sig.nextLine();
+                        System.out.println("|===========================================================|");
+                        System.out.println(" ");
 
-                    if (user < userGudang.length) { // untuk menyimpan username dan password yang telah ditambahkan
-                        userGudang[user][0] = username;
-                        userGudang[user][1] = password;
-                        user++;
-                        System.out.println(" ");
-                        System.out.println("Username dan password berhasil di daftarkan!");
-                        System.out.println(" ");
+                        if (user < userGudang.length) {
+                            userGudang[user][0] = username;
+                            userGudang[user][1] = password;
+                            user++;
+                            registrationCompleted = true; // Set registration status to true
+                            System.out.println(" ");
+                            System.out.println("Username dan password berhasil di daftarkan!");
+                            System.out.println(" ");
+                        } else {
+                            System.out.println("Pendaftaran penuh, Silahkan coba lagi!");
+                        }
                     } else {
-                        System.out.println("Pendaftaran penuh, Silahkan coba lagi!");
+                        System.out.println("Anda sudah melakukan registrasi sebelumnya.");
                     }
                     break;
 
@@ -120,7 +128,7 @@ public class SIGTA {
 
                                 for (int r = 0; r < jumlahBarang; r++) {
                                     System.out.println("|---------------------------------------| ");
-                                    System.out.println(  "|Barang ke-" + (r + 1) + "              | ");
+                                    System.out.println("|Barang ke-" + (r + 1) + "              | ");
                                     System.out.println("|---------------------------------------| ");
                                     System.out.println("|Masukan nama barang      :             | ");
                                     namaBarang[r] = sig.nextLine(); // Menggunakan nextLine untuk nama barang
@@ -128,7 +136,6 @@ public class SIGTA {
                                     pemasukan[1][itemcount] = sig.nextInt(); // Mengambil jumlah barang yang benar
                                     sig.nextLine(); // Membersihkan input buffer
                                     System.out.println("|=======================================|");
-                                    brg++;
                                 }
 
                                 System.out.println("Barang Berhasil Ditambah");
@@ -251,12 +258,15 @@ public class SIGTA {
                     }
                     break;
 
-                case 6:
+                    case 6:
                     System.out.println(" ");
                     System.out.println("Anda telah logout dari sistem !");
                     System.out.println(" ");
                     logoutuser = false;
+                    registrationCompleted = false; 
+                    loginuser = false; 
                     break;
+                
 
                 case 7:
                     System.out.println(" ");
@@ -266,10 +276,7 @@ public class SIGTA {
 
                 default:
                     System.out.println("Pilihan anda tidak valid, silahkan coba lagi !");
-
             }
-
         }
     }
-
 }
