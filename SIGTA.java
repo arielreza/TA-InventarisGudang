@@ -42,6 +42,7 @@ public class SIGTA {
             System.out.println("|7. Tampilkan Laporan Barang Rusak                          |");
             System.out.println("|8. LOGOUT                                                  |");
             System.out.println("|9. Keluar                                                  |");
+            System.out.println("|10. Cari Barang                                            |");
             System.out.println("|===========================================================|");
             System.out.println("Pilih Menu :");
         }
@@ -84,13 +85,15 @@ public class SIGTA {
                 System.out.println(" ");
                 System.exit(0);
                 break;
+            case 10:
+                cariBarang();
+                break;
+
             default:
                 System.out.println("Pilihan anda tidak valid, silahkan coba lagi !");
         }
     }
 
-    // Implementasi fungsi lainnya
-    // ...
 
     static void registerUser() {
         System.out.println(" ");
@@ -355,6 +358,49 @@ public class SIGTA {
 
         System.out.println(" ");
     }
+    
+
+    static void cariBarang() {
+        if (user == 0) {
+            System.out.println(" ");
+            System.out.println("Maaf anda belum daftar, Silahkan daftar terlebih dahulu!");
+        } else {
+            if (!loginuser) {
+                System.out.println(" ");
+                System.out.println("Maaf, Anda harus login terlebih dahulu !");
+                System.out.println(" ");
+                return;
+            }
+    
+            System.out.println("|====================================================|");
+            System.out.println("|                CARI BARANG                         |");
+            System.out.println("|====================================================|");
+            System.out.println("| Masukkan nama barang yang ingin dicari:            |");
+            String keyword = sig.nextLine();
+    
+            boolean barangDitemukan = false;
+            System.out.println("Hasil pencarian untuk '" + keyword + "':");
+    
+            for (int i = 0; i < itemcount; i++) {
+                for (int r = 0; r < pemasukan[0][i]; r++) {
+                    if (namaBarang[r].toLowerCase().contains(keyword.toLowerCase())) {
+                        barangDitemukan = true;
+                        System.out.println("Transaksi ke-" + (i + 1));
+                        System.out.println("Nama Barang  : " + namaBarang[r]);
+                        System.out.println("Jumlah       : " + pemasukan[1][i]);
+                        System.out.println("---------------------------------------");
+                    }
+                }
+            }
+    
+            if (!barangDitemukan) {
+                System.out.println("Barang tidak ditemukan.");
+            }
+    
+            System.out.println(" ");
+        }
+    }
+
     
     static void logout() {
         System.out.println(" ");
