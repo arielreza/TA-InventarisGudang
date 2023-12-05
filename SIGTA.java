@@ -10,6 +10,8 @@ public class SIGTA {
     static String[] namaBarang = new String[10];
     static int pemasukan[][] = new int[2][10];
     static int itemcount = 0;
+    static String[] laporanBarang = new String[20]; // Array untuk laporan
+    static int jumlahLaporan = 0;
 
     public static void main(String[] args) {
         while (true) {
@@ -26,6 +28,7 @@ public class SIGTA {
         System.out.println("|===========================================================|");
         System.out.println("| Silahkan Pilih Menu :                                     |");
         System.out.println("|----------------------                                     |");
+        
         if (!registrationCompleted) {
             System.out.println("|1. DAFTAR PENGGUNA                                         |");
         }
@@ -38,7 +41,10 @@ public class SIGTA {
             System.out.println("|5. Update Transaksi                                        |");
             System.out.println("|6. LOGOUT                                                  |");
         }
-        System.out.println("|7. Keluar                                                  |");
+        
+        System.out.println("|7. Laporan Barang Rusak / Catatan                           |"); 
+        System.out.println("|8. Tampilkan Laporan Barang Rusak                           |"); 
+        System.out.println("|9. Keluar                                                  |");
         System.out.println("|===========================================================|");
         System.out.println("Pilih Menu :");
     }
@@ -68,6 +74,12 @@ public class SIGTA {
                 logout();
                 break;
             case 7:
+                laporanBarangRusak();
+                break;
+            case 8:
+                tampilkanLaporanBarangRusak();
+                break;
+            case 9:
                 System.out.println(" ");
                 System.out.println("Anda berhasil keluar");
                 System.out.println(" ");
@@ -77,6 +89,9 @@ public class SIGTA {
                 System.out.println("Pilihan anda tidak valid, silahkan coba lagi !");
         }
     }
+
+    // Implementasi fungsi lainnya
+    // ...
 
     static void registerUser() {
         System.out.println(" ");
@@ -262,5 +277,53 @@ public class SIGTA {
         logoutuser = false;
         registrationCompleted = false;
         loginuser = false;
+    }
+
+    static void laporanBarangRusak() {
+        if (!logoutuser) {
+            System.out.println(" ");
+            System.out.println("Anda sudah logout, silahkan login terlebih dahulu !");
+            System.out.println(" ");
+            return;
+        }
+        if (jumlahLaporan < laporanBarang.length) {
+            System.out.println("|=======================================|");
+            System.out.println("|     LAPORAN BARANG RUSAK / CATATAN    |");
+            System.out.println("|=======================================|");
+            System.out.println("|Masukkan detail barang rusak / catatan:|");
+            String detail = sig.nextLine();
+
+            laporanBarang[jumlahLaporan] = detail;
+            jumlahLaporan++;
+
+            System.out.println("Laporan berhasil disimpan!");
+            System.out.println(" ");
+        } else {
+            System.out.println("Kapasitas laporan sudah penuh, tidak bisa menambahkan laporan baru.");
+        }
+    }
+
+    static void tampilkanLaporanBarangRusak() {
+        if (!logoutuser) {
+            System.out.println(" ");
+            System.out.println("Anda sudah logout, silahkan login terlebih dahulu !");
+            System.out.println(" ");
+            return;
+        }
+        System.out.println(" ");
+        System.out.println("|====================================================|");
+        System.out.println("|    LAPORAN BARANG RUSAK / CATATAN YANG TERSIMPAN   |");
+        System.out.println("|====================================================|");
+        System.out.println(" ");
+
+        if (jumlahLaporan == 0) {
+            System.out.println("Tidak ada laporan yang tersimpan.");
+        } else {
+            for (int i = 0; i < jumlahLaporan; i++) {
+                System.out.println("Laporan " + (i + 1) + ": " + laporanBarang[i]);
+            }
+        }
+
+        System.out.println(" ");
     }
 }
