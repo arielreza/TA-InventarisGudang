@@ -158,131 +158,161 @@ public class SIGTA {
         if (user == 0) {
             System.out.println(" ");
             System.out.println("Maaf anda belum daftar, Silahkan daftar terlebih dahulu!");
-        }else{
-            if (!loginuser){
+        } else {
+            if (!loginuser) {
                 System.out.println(" ");
                 System.out.println("Maaf, Anda harus login terlebih dahulu !");
                 System.out.println(" ");
                 return;
             }
-        boolean dataBaru = true;
-        while (dataBaru) {
-            System.out.println("|=======================================|");
-            System.out.println("|      INPUT DATA BARANG DI GUDANG      |");
-            System.out.println("|=======================================|");
-            System.out.println("|Jumlah barang yang akan dimasukkan:    |");
-            int jumlahBarang = sig.nextInt();
-            sig.nextLine();
-
-            for (int r = 0; r < jumlahBarang; r++) {
-                System.out.println("|---------------------------------------| ");
-                System.out.println("|Barang ke-" + (r + 1) + "              | ");
-                System.out.println("|---------------------------------------| ");
-                System.out.println("|Masukan nama barang      :             | ");
-                namaBarang[r] = sig.nextLine();
-                System.out.println("|Masukan jumlah barang    :             |");
-                pemasukan[1][itemcount] = sig.nextInt();
-                sig.nextLine();
+            boolean dataBaru = true;
+            while (dataBaru) {
                 System.out.println("|=======================================|");
+                System.out.println("|      INPUT DATA BARANG DI GUDANG      |");
+                System.out.println("|=======================================|");
+                System.out.println("|Jumlah barang yang akan dimasukkan:    |");
+                int jumlahBarang = sig.nextInt();
+                sig.nextLine();
+    
+                for (int r = 0; r < jumlahBarang; r++) {
+                    System.out.println("|---------------------------------------| ");
+                    System.out.println("|Barang ke-" + (r + 1) + "              | ");
+                    System.out.println("|---------------------------------------| ");
+                    System.out.println("|Masukan nama barang      :             | ");
+                    namaBarang[itemcount + r] = sig.nextLine(); // Menggunakan itemcount + r sebagai indeks
+                    System.out.println("|Masukan jumlah barang    :             |");
+                    pemasukan[1][itemcount + r] = sig.nextInt();
+                    sig.nextLine();
+                    System.out.println("|=======================================|");
+                }
+    
+                System.out.println("Barang Berhasil Ditambah");
+                pemasukan[0][itemcount] = jumlahBarang;
+                itemcount += jumlahBarang; // Menambahkan jumlah barang yang baru dimasukkan ke itemcount
+    
+                System.out.println("Apakah ada barang yang ingin anda tambahkan? (y/n)");
+                char newData = sig.next().charAt(0);
+                if (newData == 'n') {
+                    dataBaru = false;
+                }
             }
-
-            System.out.println("Barang Berhasil Ditambah");
-            pemasukan[0][itemcount] = jumlahBarang;
-            itemcount++;
-
-            System.out.println("Apakah ada barang yang ingin anda tambahkan? (y/n)");
-            char newData = sig.next().charAt(0);
-            if (newData == 'n') {
-                dataBaru = false;
-            }
-        }}
+        }
     }
+    
+    
 
     static void displayDataBarang() {
         if (user == 0) {
             System.out.println(" ");
             System.out.println("Maaf anda belum daftar, Silahkan daftar terlebih dahulu!");
-        }else{
-            if (!loginuser){
+        } else {
+            if (!loginuser) {
                 System.out.println(" ");
                 System.out.println("Maaf, Anda harus login terlebih dahulu !");
                 System.out.println(" ");
                 return;
             }
-        System.out.println(" ");
-        System.out.println("=======================================");
-        System.out.println("       DISPLAY BARANG DI GUDANG        ");
-        System.out.println("=======================================");
-        System.out.println("Data Barang yang Telah Dimasukkan :    ");
-        System.out.println("---------------------------------------");
-
-        for (int i = 0; i < itemcount; i++) {
-            System.out.println("Transaksi ke-" + (i + 1));
-            System.out.println("---------------------------------------");
-            for (int r = 0; r < pemasukan[0][i]; r++) {
-                System.out.println("Nama Barang  : " + namaBarang[r]);
-                System.out.println("Jumlah       : " + pemasukan[1][i]);
-            }
-            System.out.println("---------------------------------------");
             System.out.println(" ");
-        }}
+            System.out.println("=======================================");
+            System.out.println("       DISPLAY BARANG DI GUDANG        ");
+            System.out.println("=======================================");
+            System.out.println("Data Barang yang Telah Dimasukkan :    ");
+            System.out.println("---------------------------------------");
+    
+            int transaksiCounter = 1;
+            int barangCounter = 0;
+    
+            while (barangCounter < itemcount) {
+                System.out.println("Transaksi ke-" + transaksiCounter);
+                System.out.println("---------------------------------------");
+    
+                int jumlahBarangTransaksi = pemasukan[0][barangCounter];
+                for (int r = 0; r < jumlahBarangTransaksi; r++) {
+                    System.out.println("Nama Barang  : " + namaBarang[barangCounter]);
+                    System.out.println("Jumlah       : " + pemasukan[1][barangCounter]);
+                    barangCounter++;
+                }
+    
+                System.out.println("---------------------------------------");
+                System.out.println(" ");
+                transaksiCounter++;
+            }
+        }
     }
-
+    
+    
     static void updateTransaksi() {
         if (user == 0) {
             System.out.println(" ");
             System.out.println("Maaf anda belum daftar, Silahkan daftar terlebih dahulu!");
-        }else{
-            if (!loginuser){
+        } else {
+            if (!loginuser) {
                 System.out.println(" ");
                 System.out.println("Maaf, Anda harus login terlebih dahulu !");
                 System.out.println(" ");
                 return;
             }
-        if (itemcount > 0) {
-            System.out.println(" ");
-            System.out.println("================================================");
-            System.out.println("       UPDATE TRANSAKSI DI GUDANG               ");
-            System.out.println("================================================");
-            System.out.println("Pilih nomor transaksi yang ingin diubah:        ");
-            int nomorTransaksi = sig.nextInt();
-
-            if (nomorTransaksi > 0 && nomorTransaksi <= itemcount) {
-                System.out.println("------------------------------------------------");
-                System.out.println("Data Barang pada transaksi ke-" + nomorTransaksi + ":");
-                System.out.println("------------------------------------------------");
-                for (int r = 0; r < pemasukan[0][nomorTransaksi - 1]; r++) {
-                    System.out.println((r + 1) + ". Nama Barang: " + namaBarang[r]);
-                    System.out.println("Jumlah: " + pemasukan[1][nomorTransaksi - 1]);
-                }
-
-                System.out.println("------------------------------------------------");
-                System.out.println("Pilih nomor barang yang ingin diubah jumlahnya: ");
-                int nomorBarang = sig.nextInt();
-
-                if (nomorBarang > 0 && nomorBarang <= pemasukan[0][nomorTransaksi - 1]) {
-                    System.out.println("------------------------------------------------");
-                    System.out.println("Masukkan jumlah baru untuk barang " + namaBarang[nomorBarang - 1] + ":");
-                    int jumlahBaru = sig.nextInt();
-
-                    if (jumlahBaru >= 0) {
-                        pemasukan[1][nomorTransaksi - 1] = jumlahBaru;
-                        System.out.println("Jumlah barang berhasil diubah menjadi " + jumlahBaru);
-                        System.out.println("================================================");
-                        System.out.println(" ");
-                    } else {
-                        System.out.println("Jumlah barang baru tidak valid");
+            if (itemcount > 0) {
+                System.out.println(" ");
+                System.out.println("================================================");
+                System.out.println("       UPDATE TRANSAKSI DI GUDANG               ");
+                System.out.println("================================================");
+                System.out.println("Pilih nomor transaksi yang ingin diubah:        ");
+                int nomorTransaksi = sig.nextInt();
+                sig.nextLine();
+    
+                int counter = 0;
+                int currentTransaksi = 1;
+                while (counter < itemcount) {
+                    if (currentTransaksi == nomorTransaksi) {
+                        System.out.println("------------------------------------------------");
+                        System.out.println("Data Barang pada transaksi ke-" + nomorTransaksi + ":");
+                        System.out.println("------------------------------------------------");
+    
+                        int jumlahBarangTransaksi = pemasukan[0][counter];
+                        for (int r = 0; r < jumlahBarangTransaksi; r++) {
+                            System.out.println((r + 1) + ". Nama Barang: " + namaBarang[counter]);
+                            System.out.println("Jumlah: " + pemasukan[1][counter]);
+                            counter++;
+                        }
+    
+                        System.out.println("------------------------------------------------");
+                        System.out.println("Pilih nomor barang yang ingin diubah jumlahnya: ");
+                        int nomorBarang = sig.nextInt();
+    
+                        if (nomorBarang > 0 && nomorBarang <= pemasukan[0][counter - jumlahBarangTransaksi]) {
+                            System.out.println("------------------------------------------------");
+                            System.out.println("Masukkan jumlah baru untuk barang " + namaBarang[counter - jumlahBarangTransaksi + nomorBarang - 1] + ":");
+                            int jumlahBaru = sig.nextInt();
+    
+                            if (jumlahBaru >= 0) {
+                                pemasukan[1][counter - jumlahBarangTransaksi + nomorBarang - 1] = jumlahBaru;
+                                System.out.println("Jumlah barang berhasil diubah menjadi " + jumlahBaru);
+                                System.out.println("================================================");
+                                System.out.println(" ");
+                            } else {
+                                System.out.println("Jumlah barang baru tidak valid");
+                            }
+                        } else {
+                            System.out.println("Nomor barang tidak valid");
+                        }
+                        break;
                     }
-                } else {
-                    System.out.println("Nomor barang tidak valid");
+                    int jumlahBarangTransaksi = pemasukan[0][counter];
+                    counter += jumlahBarangTransaksi;
+                    currentTransaksi++;
+                }
+    
+                if (currentTransaksi > itemcount) {
+                    System.out.println("Nomor transaksi tidak valid");
                 }
             } else {
-                System.out.println("Nomor transaksi tidak valid");
+                System.out.println("Belum ada data barang yang dimasukkan");
             }
-        } else {
-            System.out.println("Belum ada data barang yang dimasukkan");
-        }}
+        }
     }
+    
+    
 
     static void laporanBarangRusak() {
         if (user == 0) {
