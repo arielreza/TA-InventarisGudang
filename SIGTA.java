@@ -38,9 +38,9 @@ public class SIGTA {
             System.out.println("|3. Input data barang di Gudang                             |");
             System.out.println("|4. Display data barang di Gudang                           |");
             System.out.println("|5. Update Transaksi                                        |");
-            System.out.println("|6. LOGOUT                                                  |");
-            System.out.println("|7. Laporan Barang Rusak / Catatan                           |");
-            System.out.println("|8. Tampilkan Laporan Barang Rusak                           |");
+            System.out.println("|6. Laporan Barang Rusak / Catatan                          |");
+            System.out.println("|7. Tampilkan Laporan Barang Rusak                          |");
+            System.out.println("|8. LOGOUT                                                  |");
             System.out.println("|9. Keluar                                                  |");
             System.out.println("|===========================================================|");
             System.out.println("Pilih Menu :");
@@ -70,13 +70,13 @@ public class SIGTA {
                 updateTransaksi();
                 break;
             case 6:
-                logout();
-                break;
-            case 7:
                 laporanBarangRusak();
                 break;
-            case 8:
+            case 7:
                 tampilkanLaporanBarangRusak();
+                break;
+            case 8:
+                logout();
                 break;
             case 9:
                 System.out.println(" ");
@@ -152,12 +152,16 @@ public class SIGTA {
     }
 
     static void inputDataBarang() {
-        if (!logoutuser) {
+        if (user == 0) {
             System.out.println(" ");
-            System.out.println("Anda sudah logout, silahkan login terlebih dahulu !");
-            System.out.println(" ");
-            return;
-        }
+            System.out.println("Maaf anda belum daftar, Silahkan daftar terlebih dahulu!");
+        }else{
+            if (!loginuser){
+                System.out.println(" ");
+                System.out.println("Maaf, Anda harus login terlebih dahulu !");
+                System.out.println(" ");
+                return;
+            }
         boolean dataBaru = true;
         while (dataBaru) {
             System.out.println("|=======================================|");
@@ -188,16 +192,20 @@ public class SIGTA {
             if (newData == 'n') {
                 dataBaru = false;
             }
-        }
+        }}
     }
 
     static void displayDataBarang() {
-        if (!logoutuser) {
+        if (user == 0) {
             System.out.println(" ");
-            System.out.println("Anda sudah logout, silahkan login terlebih dahulu !");
-            System.out.println(" ");
-            return;
-        }
+            System.out.println("Maaf anda belum daftar, Silahkan daftar terlebih dahulu!");
+        }else{
+            if (!loginuser){
+                System.out.println(" ");
+                System.out.println("Maaf, Anda harus login terlebih dahulu !");
+                System.out.println(" ");
+                return;
+            }
         System.out.println(" ");
         System.out.println("=======================================");
         System.out.println("       DISPLAY BARANG DI GUDANG        ");
@@ -214,16 +222,20 @@ public class SIGTA {
             }
             System.out.println("---------------------------------------");
             System.out.println(" ");
-        }
+        }}
     }
 
     static void updateTransaksi() {
-        if (!logoutuser) {
+        if (user == 0) {
             System.out.println(" ");
-            System.out.println("Anda sudah logout, silahkan login terlebih dahulu !");
-            System.out.println(" ");
-            return;
-        }
+            System.out.println("Maaf anda belum daftar, Silahkan daftar terlebih dahulu!");
+        }else{
+            if (!loginuser){
+                System.out.println(" ");
+                System.out.println("Maaf, Anda harus login terlebih dahulu !");
+                System.out.println(" ");
+                return;
+            }
         if (itemcount > 0) {
             System.out.println(" ");
             System.out.println("================================================");
@@ -266,31 +278,28 @@ public class SIGTA {
             }
         } else {
             System.out.println("Belum ada data barang yang dimasukkan");
-        }
-    }
-
-    static void logout() {
-        System.out.println(" ");
-        System.out.println("Anda telah logout dari sistem !");
-        System.out.println(" ");
-        logoutuser = false;
-        registrationCompleted = false;
-        loginuser = false;
+        }}
     }
 
     static void laporanBarangRusak() {
-        if (!logoutuser) {
+        if (user == 0) {
             System.out.println(" ");
-            System.out.println("Anda sudah logout, silahkan login terlebih dahulu !");
-            System.out.println(" ");
-            return;
-        }
+            System.out.println("Maaf anda belum daftar, Silahkan daftar terlebih dahulu!");
+        }else{
+            if (!loginuser){
+                System.out.println(" ");
+                System.out.println("Maaf, Anda harus login terlebih dahulu !");
+                System.out.println(" ");
+                return;
+            }
+
         if (jumlahLaporan < laporanBarang.length) {
             System.out.println("|=======================================|");
             System.out.println("|     LAPORAN BARANG RUSAK / CATATAN    |");
             System.out.println("|=======================================|");
             System.out.println("|Masukkan detail barang rusak / catatan:|");
             String detail = sig.nextLine();
+            System.out.println("|=======================================|");
 
             laporanBarang[jumlahLaporan] = detail;
             jumlahLaporan++;
@@ -299,16 +308,21 @@ public class SIGTA {
             System.out.println(" ");
         } else {
             System.out.println("Kapasitas laporan sudah penuh, tidak bisa menambahkan laporan baru.");
-        }
+        }}
+        System.out.println(" ");
     }
 
     static void tampilkanLaporanBarangRusak() {
-        if (!logoutuser) {
+        if (user == 0) {
             System.out.println(" ");
-            System.out.println("Anda sudah logout, silahkan login terlebih dahulu !");
-            System.out.println(" ");
-            return;
-        }
+            System.out.println("Maaf anda belum daftar, Silahkan daftar terlebih dahulu!");
+        }else{
+            if (!loginuser){
+                System.out.println(" ");
+                System.out.println("Maaf, Anda harus login terlebih dahulu !");
+                System.out.println(" ");
+                return;
+            }
         System.out.println(" ");
         System.out.println("|====================================================|");
         System.out.println("|    LAPORAN BARANG RUSAK / CATATAN YANG TERSIMPAN   |");
@@ -320,9 +334,19 @@ public class SIGTA {
         } else {
             for (int i = 0; i < jumlahLaporan; i++) {
                 System.out.println("Laporan " + (i + 1) + ": " + laporanBarang[i]);
+                System.out.println("|====================================================|");
             }
-        }
+        }}
 
         System.out.println(" ");
+    }
+    
+    static void logout() {
+        System.out.println(" ");
+        System.out.println("Anda telah logout dari sistem !");
+        System.out.println(" ");
+        logoutuser = false;
+        registrationCompleted = false;
+        loginuser = false;
     }
 }
