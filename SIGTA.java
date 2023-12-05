@@ -28,26 +28,25 @@ public class SIGTA {
         System.out.println("|===========================================================|");
         System.out.println("| Silahkan Pilih Menu :                                     |");
         System.out.println("|----------------------                                     |");
-        
+
         if (!registrationCompleted) {
             System.out.println("|1. DAFTAR PENGGUNA                                         |");
         }
         if (!loginuser) {
             System.out.println("|2. LOGIN PENGGUNA                                          |");
         }
-        if (loginuser) {
             System.out.println("|3. Input data barang di Gudang                             |");
             System.out.println("|4. Display data barang di Gudang                           |");
             System.out.println("|5. Update Transaksi                                        |");
             System.out.println("|6. LOGOUT                                                  |");
+            System.out.println("|7. Laporan Barang Rusak / Catatan                           |");
+            System.out.println("|8. Tampilkan Laporan Barang Rusak                           |");
+            System.out.println("|9. Keluar                                                  |");
+            System.out.println("|===========================================================|");
+            System.out.println("Pilih Menu :");
         }
-        
-        System.out.println("|7. Laporan Barang Rusak / Catatan                           |"); 
-        System.out.println("|8. Tampilkan Laporan Barang Rusak                           |"); 
-        System.out.println("|9. Keluar                                                  |");
-        System.out.println("|===========================================================|");
-        System.out.println("Pilih Menu :");
-    }
+
+    
 
     static void switchMenu(int pilih) {
         switch (pilih) {
