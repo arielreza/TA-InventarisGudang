@@ -37,7 +37,7 @@ public class SIGTA {
         }
             System.out.println("|3. Input data barang di Gudang                             |");
             System.out.println("|4. Display data barang di Gudang                           |");
-            System.out.println("|5. Update Transaksi                                        |");
+            System.out.println("|5. Update Nota                                             |");
             System.out.println("|6. Laporan Barang Rusak / Catatan                          |");
             System.out.println("|7. Tampilkan Laporan Barang Rusak                          |");
             System.out.println("|8. LOGOUT                                                  |");
@@ -68,7 +68,7 @@ public class SIGTA {
                 displayDataBarang();
                 break;
             case 5:
-                updateTransaksi();
+                updateNota();
                 break;
             case 6:
                 laporanBarangRusak();
@@ -200,6 +200,7 @@ public class SIGTA {
     }
     
     
+    
 
     static void displayDataBarang() {
         if (user == 0) {
@@ -219,15 +220,15 @@ public class SIGTA {
             System.out.println("Data Barang yang Telah Dimasukkan :    ");
             System.out.println("---------------------------------------");
     
-            int transaksiCounter = 1;
+            int notaCounter = 1;
             int barangCounter = 0;
     
             while (barangCounter < itemcount) {
-                System.out.println("Transaksi ke-" + transaksiCounter);
+                System.out.println("Nota ke-" + notaCounter);
                 System.out.println("---------------------------------------");
     
-                int jumlahBarangTransaksi = pemasukan[0][barangCounter];
-                for (int r = 0; r < jumlahBarangTransaksi; r++) {
+                int jumlahBarangNota = pemasukan[0][barangCounter];
+                for (int r = 0; r < jumlahBarangNota; r++) {
                     System.out.println("Nama Barang  : " + namaBarang[barangCounter]);
                     System.out.println("Jumlah       : " + pemasukan[1][barangCounter]);
                     barangCounter++;
@@ -235,13 +236,14 @@ public class SIGTA {
     
                 System.out.println("---------------------------------------");
                 System.out.println(" ");
-                transaksiCounter++;
+                notaCounter++;
             }
         }
     }
     
     
-    static void updateTransaksi() {
+    
+    static void updateNota() {
         if (user == 0) {
             System.out.println(" ");
             System.out.println("Maaf anda belum daftar, Silahkan daftar terlebih dahulu!");
@@ -255,22 +257,22 @@ public class SIGTA {
             if (itemcount > 0) {
                 System.out.println(" ");
                 System.out.println("================================================");
-                System.out.println("       UPDATE TRANSAKSI DI GUDANG               ");
+                System.out.println("       UPDATE BARANG DI GUDANG               ");
                 System.out.println("================================================");
-                System.out.println("Pilih nomor transaksi yang ingin diubah:        ");
-                int nomorTransaksi = sig.nextInt();
+                System.out.println("Pilih nomor nota yang ingin diubah:        ");
+                int nomorNota = sig.nextInt();
                 sig.nextLine();
     
                 int counter = 0;
-                int currentTransaksi = 1;
+                int currentNota = 1;
                 while (counter < itemcount) {
-                    if (currentTransaksi == nomorTransaksi) {
+                    if (currentNota == nomorNota) {
                         System.out.println("------------------------------------------------");
-                        System.out.println("Data Barang pada transaksi ke-" + nomorTransaksi + ":");
+                        System.out.println("Data Barang pada nota ke-" + nomorNota + ":");
                         System.out.println("------------------------------------------------");
     
-                        int jumlahBarangTransaksi = pemasukan[0][counter];
-                        for (int r = 0; r < jumlahBarangTransaksi; r++) {
+                        int jumlahBarangNota = pemasukan[0][counter];
+                        for (int r = 0; r < jumlahBarangNota; r++) {
                             System.out.println((r + 1) + ". Nama Barang: " + namaBarang[counter]);
                             System.out.println("Jumlah: " + pemasukan[1][counter]);
                             counter++;
@@ -280,13 +282,13 @@ public class SIGTA {
                         System.out.println("Pilih nomor barang yang ingin diubah jumlahnya: ");
                         int nomorBarang = sig.nextInt();
     
-                        if (nomorBarang > 0 && nomorBarang <= pemasukan[0][counter - jumlahBarangTransaksi]) {
+                        if (nomorBarang > 0 && nomorBarang <= pemasukan[0][counter - jumlahBarangNota]) {
                             System.out.println("------------------------------------------------");
-                            System.out.println("Masukkan jumlah baru untuk barang " + namaBarang[counter - jumlahBarangTransaksi + nomorBarang - 1] + ":");
+                            System.out.println("Masukkan jumlah baru untuk barang " + namaBarang[counter - jumlahBarangNota + nomorBarang - 1] + ":");
                             int jumlahBaru = sig.nextInt();
     
                             if (jumlahBaru >= 0) {
-                                pemasukan[1][counter - jumlahBarangTransaksi + nomorBarang - 1] = jumlahBaru;
+                                pemasukan[1][counter - jumlahBarangNota + nomorBarang - 1] = jumlahBaru;
                                 System.out.println("Jumlah barang berhasil diubah menjadi " + jumlahBaru);
                                 System.out.println("================================================");
                                 System.out.println(" ");
@@ -298,19 +300,20 @@ public class SIGTA {
                         }
                         break;
                     }
-                    int jumlahBarangTransaksi = pemasukan[0][counter];
-                    counter += jumlahBarangTransaksi;
-                    currentTransaksi++;
+                    int jumlahBarangNota = pemasukan[0][counter];
+                    counter += jumlahBarangNota;
+                    currentNota++;
                 }
     
-                if (currentTransaksi > itemcount) {
-                    System.out.println("Nomor transaksi tidak valid");
+                if (currentNota > itemcount) {
+                    System.out.println("Nomor nota tidak valid");
                 }
             } else {
                 System.out.println("Belum ada data barang yang dimasukkan");
             }
         }
     }
+    
     
     
 
@@ -415,7 +418,7 @@ public class SIGTA {
                 for (int r = 0; r < pemasukan[0][i]; r++) {
                     if (namaBarang[r].toLowerCase().contains(keyword.toLowerCase())) {
                         barangDitemukan = true;
-                        System.out.println("Transaksi ke-" + (i + 1));
+                        System.out.println("Nota ke-" + (i + 1));
                         System.out.println("Nama Barang  : " + namaBarang[r]);
                         System.out.println("Jumlah       : " + pemasukan[1][i]);
                         System.out.println("---------------------------------------");
