@@ -285,32 +285,48 @@ public class SIGTA {
         if (user == 0) {
             System.out.println(" ");
             System.out.println("Maaf anda belum daftar, Silahkan daftar terlebih dahulu!");
-        }else{
-            if (!loginuser){
+        } else {
+            if (!loginuser) {
                 System.out.println(" ");
                 System.out.println("Maaf, Anda harus login terlebih dahulu !");
                 System.out.println(" ");
                 return;
             }
-
-        if (jumlahLaporan < laporanBarang.length) {
-            System.out.println("|=======================================|");
-            System.out.println("|     LAPORAN BARANG RUSAK / CATATAN    |");
-            System.out.println("|=======================================|");
-            System.out.println("|Masukkan detail barang rusak / catatan:|");
-            String detail = sig.nextLine();
-            System.out.println("|=======================================|");
-
-            laporanBarang[jumlahLaporan] = detail;
-            jumlahLaporan++;
-
-            System.out.println("Laporan berhasil disimpan!");
-            System.out.println(" ");
-        } else {
-            System.out.println("Kapasitas laporan sudah penuh, tidak bisa menambahkan laporan baru.");
-        }}
-        System.out.println(" ");
+    
+            boolean laporanBaru = true;
+            while (laporanBaru) {
+                System.out.println("|=======================================|");
+                System.out.println("|     INPUT LAPORAN BARANG RUSAK        |");
+                System.out.println("|=======================================|");
+                System.out.println("|Jumlah barang rusak :                  |");
+                int jumlahBarangRusak = sig.nextInt();
+                sig.nextLine();
+    
+                for (int r = 0; r < jumlahBarangRusak; r++) {
+                    System.out.println("|---------------------------------------| ");
+                    System.out.println("|Barang Rusak ke-" + (r + 1) + "           | ");
+                    System.out.println("|---------------------------------------| ");
+                    System.out.println("|Masukan nama barang rusak  :           | ");
+                    String namaBarangRusak = sig.nextLine();
+                    System.out.println("|Masukan detail kerusakan   :           |");
+                    String detailKerusakan = sig.nextLine();
+                    System.out.println("|=======================================|");
+                    
+                    // Simpan data laporan barang rusak ke array laporanBarang
+                    laporanBarang[jumlahLaporan] = "Barang: " + namaBarangRusak + ", Detail Kerusakan: " + detailKerusakan;
+                    jumlahLaporan++;
+                }
+    
+                System.out.println("Laporan Barang Rusak Berhasil Ditambah");
+                System.out.println("Apakah ada laporan barang rusak yang ingin anda tambahkan? (y/n)");
+                char newData = sig.next().charAt(0);
+                if (newData == 'n') {
+                    laporanBaru = false;
+                }
+            }
+        }
     }
+    
 
     static void tampilkanLaporanBarangRusak() {
         if (user == 0) {
@@ -327,7 +343,6 @@ public class SIGTA {
         System.out.println("|====================================================|");
         System.out.println("|    LAPORAN BARANG RUSAK / CATATAN YANG TERSIMPAN   |");
         System.out.println("|====================================================|");
-        System.out.println(" ");
 
         if (jumlahLaporan == 0) {
             System.out.println("Tidak ada laporan yang tersimpan.");
