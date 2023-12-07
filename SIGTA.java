@@ -286,17 +286,17 @@ public class SIGTA {
                 int nomorNota = sig.nextInt();
                 sig.nextLine();
                 
-                if (nomorNota >= 1 && nomorNota <= notaCounter) {
+                if (nomorNota >= 1 && nomorNota <= currentNota) {
     
                     int counter = 0;
-                    currentNota = 1;
+                    int currentNota = 1;
                     while (currentNota <= nomorNota) {
                         if (currentNota == nomorNota) {
                             System.out.println("------------------------------------------------");
                             System.out.println("Data Barang pada nota ke-" + nomorNota + ":");
                             System.out.println("------------------------------------------------");
     
-                            int jumlahBarangNota =0;
+                            int jumlahBarangNota = 2; // Tentukan jumlah barang per nota yang ingin diupdate
                             for (int r = 0; r < jumlahBarangNota; r++) {
                                 if (counter >= itemcount) {
                                     break;
@@ -341,6 +341,7 @@ public class SIGTA {
             }
         }
     }
+    
     
     
 
