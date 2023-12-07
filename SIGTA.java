@@ -243,7 +243,7 @@ public class SIGTA {
             int barangCounter = 0;
             int barangKe = 1;
             
-            while (barangCounter < itemcount) {
+            while (barangCounter < itemcount && notaCounter <= 2) {
                 int jumlahBarangNota = pemasukan[0][barangCounter];
                 for (int r = 0; r < itemcount; r++) {
                     System.out.println("Nota ke-" + notaCounter);
@@ -298,7 +298,7 @@ public class SIGTA {
                             System.out.println("Data Barang pada nota ke-" + nomorNota + ":");
                             System.out.println("------------------------------------------------");
     
-                            int jumlahBarangNota = pemasukan[1][counter];
+                            int jumlahBarangNota =0;
                             for (int r = 0; r < jumlahBarangNota; r++) {
                                 if (counter >= itemcount) {
                                     break;
@@ -335,7 +335,7 @@ public class SIGTA {
                         currentNota++;
                     }
     
-                } else {
+                } else {        
                     System.out.println("Nomor nota tidak valid");
                 }
             } else {
