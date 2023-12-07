@@ -126,6 +126,7 @@ public class SIGTA {
         if (user == 0) {
             System.out.println(" ");
             System.out.println("Maaf anda belum daftar, Silahkan daftar terlebih dahulu!");
+            System.out.println(" ");
         } else {
             System.out.println("|===========================================================|");
             System.out.println("|                       LOGIN PENGGUNA                      |");
@@ -163,6 +164,7 @@ public class SIGTA {
         if (user == 0) {
             System.out.println(" ");
             System.out.println("Maaf anda belum daftar, Silahkan daftar terlebih dahulu!");
+            System.out.println(" ");
         } else {
             if (!loginuser) {
                 System.out.println(" ");
@@ -223,6 +225,7 @@ public class SIGTA {
         if (user == 0) {
             System.out.println(" ");
             System.out.println("Maaf anda belum daftar, Silahkan daftar terlebih dahulu!");
+            System.out.println(" ");
         } else {
             if (!loginuser) {
                 System.out.println(" ");
@@ -268,6 +271,7 @@ public class SIGTA {
         if (user == 0) {
             System.out.println(" ");
             System.out.println("Maaf anda belum daftar, Silahkan daftar terlebih dahulu!");
+            System.out.println(" ");
         } else {
             if (!loginuser) {
                 System.out.println(" ");
@@ -283,56 +287,57 @@ public class SIGTA {
                 System.out.println("Pilih nomor nota yang ingin diubah:        ");
                 int nomorNota = sig.nextInt();
                 sig.nextLine();
-                if (nomorNota == (notaCounter - 1)) {
-
                 
+                if (nomorNota >= 1 && nomorNota <= notaCounter) {
     
-                int counter = 0;
-                 currentNota = 1;
-                while (counter < itemcount) {
-                    if (currentNota == nomorNota) {
-                        System.out.println("------------------------------------------------");
-                        System.out.println("Data Barang pada nota ke-" + nomorNota + ":");
-                        System.out.println("------------------------------------------------");
-    
-                        int jumlahBarangNota = pemasukan[0][counter];
-                        for (int r = 0; r < (notaCounter-1); r++) {
-                            System.out.println((r + 1) + ". Nama Barang: " + namaBarang[counter]);
-                            System.out.println("Jumlah: " + pemasukan[1][counter]);
-                            counter++;
-                        }
-    
-                        System.out.println("------------------------------------------------");
-                        System.out.println("Pilih nomor barang yang ingin diubah jumlahnya: ");
-                        int nomorBarang = sig.nextInt();
-    
-                        if (nomorBarang > 0 && nomorBarang <= (notaCounter-1)) {
+                    int counter = 0;
+                    currentNota = 1;
+                    while (currentNota <= nomorNota) {
+                        if (currentNota == nomorNota) {
                             System.out.println("------------------------------------------------");
-                            System.out.println("Masukkan jumlah baru untuk barang " + namaBarang[counter - jumlahBarangNota + nomorBarang - 1] + ":");
-                            int jumlahBaru = sig.nextInt();
+                            System.out.println("Data Barang pada nota ke-" + nomorNota + ":");
+                            System.out.println("------------------------------------------------");
     
-                            if (jumlahBaru >= 0) {
-                                pemasukan[1][counter - jumlahBarangNota + nomorBarang - 1] = jumlahBaru;
-                                System.out.println("Jumlah barang berhasil diubah menjadi " + jumlahBaru);
-                                System.out.println("================================================");
-                                System.out.println(" ");
-                            } else {
-                                System.out.println("Jumlah barang baru tidak valid");
+                            int jumlahBarangNota = pemasukan[1][counter];
+                            for (int r = 0; r < jumlahBarangNota; r++) {
+                                if (counter >= itemcount) {
+                                    break;
+                                }
+                                System.out.println((r + 1) + ". Nama Barang: " + namaBarang[counter]);
+                                System.out.println("Jumlah: " + pemasukan[1][counter]);
+                                counter++;
                             }
-                        } else {
-                            System.out.println("Nomor barang tidak valid");
-                        }
-                        break;
-                    }
-                    int jumlahBarangNota = pemasukan[0][counter];
-                    counter += jumlahBarangNota;
-                    currentNota++;
-                }
     
-                if (currentNota > itemcount) {
+                            System.out.println("------------------------------------------------");
+                            System.out.println("Pilih nomor barang yang ingin diubah jumlahnya: ");
+                            int nomorBarang = sig.nextInt();
+    
+                            if (nomorBarang > 0 && nomorBarang <= jumlahBarangNota) {
+                                System.out.println("------------------------------------------------");
+                                System.out.println("Masukkan jumlah baru untuk barang " + namaBarang[counter - jumlahBarangNota + nomorBarang - 1] + ":");
+                                int jumlahBaru = sig.nextInt();
+    
+                                if (jumlahBaru >= 0) {
+                                    pemasukan[1][counter - jumlahBarangNota + nomorBarang - 1] = jumlahBaru;
+                                    System.out.println("Jumlah barang berhasil diubah menjadi " + jumlahBaru);
+                                    System.out.println("================================================");
+                                    System.out.println(" ");
+                                } else {
+                                    System.out.println("Jumlah barang baru tidak valid");
+                                }
+                            } else {
+                                System.out.println("Nomor barang tidak valid");
+                            }
+                            break;
+                        }
+                        int jumlahBarangNota = pemasukan[1][counter];
+                        counter += jumlahBarangNota;
+                        currentNota++;
+                    }
+    
+                } else {
                     System.out.println("Nomor nota tidak valid");
                 }
-            }
             } else {
                 System.out.println("Belum ada data barang yang dimasukkan");
             }
@@ -340,12 +345,12 @@ public class SIGTA {
     }
     
     
-    
 
     static void laporanBarangRusak() {
         if (user == 0) {
             System.out.println(" ");
             System.out.println("Maaf anda belum daftar, Silahkan daftar terlebih dahulu!");
+            System.out.println(" ");
         } else {
             if (!loginuser) {
                 System.out.println(" ");
@@ -393,6 +398,7 @@ public class SIGTA {
         if (user == 0) {
             System.out.println(" ");
             System.out.println("Maaf anda belum daftar, Silahkan daftar terlebih dahulu!");
+            System.out.println(" ");
         }else{
             if (!loginuser){
                 System.out.println(" ");
@@ -422,6 +428,7 @@ public class SIGTA {
         if (user == 0) {
             System.out.println(" ");
             System.out.println("Maaf anda belum daftar, Silahkan daftar terlebih dahulu!");
+            System.out.println(" ");
         } else {
             if (!loginuser) {
                 System.out.println(" ");
