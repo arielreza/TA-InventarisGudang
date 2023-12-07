@@ -239,34 +239,32 @@ public class SIGTA {
             System.out.println("=======================================");
             System.out.println("Data Barang yang Telah Dimasukkan :    ");
             System.out.println("---------------------------------------");
-
-            int barangCounter = 0;
-            int barangKe = 1;
-            
-            while (barangCounter < itemcount && notaCounter <= 2) {
-                int jumlahBarangNota = pemasukan[0][barangCounter];
-                for (int r = 0; r < itemcount; r++) {
-                    System.out.println("Nota ke-" + notaCounter);
+    
+            int currentNota = 1;
+            int currentBarang = 0;
+    
+            while (currentBarang < itemcount) {
+                System.out.println("Nota ke-" + currentNota);
                 System.out.println("---------------------------------------");
-                    System.out.println("Barang ke"+barangKe);
-                System.out.println("---------------------------------------");
-                    System.out.println("Nama Barang  : " + namaBarang[barangCounter]);
-                    System.out.println("Tipe Barang  : " + userGudang[barangCounter][1]);
-                    System.out.println("jumlah       : " + pemasukan[1][barangCounter]);
-                System.out.println("---------------------------------------");
-              
-                barangKe++;
-                barangCounter++;
+    
+                for (int i = 0; i < 2; i++) {
+                    if (currentBarang < itemcount) {
+                        System.out.println("Barang ke-" + (i + 1));
+                        System.out.println("---------------------------------------");
+                        System.out.println("Nama Barang  : " + namaBarang[currentBarang]);
+                        System.out.println("Tipe Barang  : " + userGudang[currentBarang][1]);
+                        System.out.println("Jumlah       : " + pemasukan[1][currentBarang]);
+                        System.out.println("---------------------------------------");
+                        currentBarang++;
+                    }
                 }
-                
-                System.out.println("---------------------------------------");
-                System.out.println(" ");
-                  notaCounter++;
-               break;
+    
+                currentNota++;
             }
         }
-    } 
-
+    }
+    
+    
     static void updateNota() {
         if (user == 0) {
             System.out.println(" ");
