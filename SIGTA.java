@@ -344,19 +344,21 @@ public class SIGTA {
                 int jumlahBarangRusak = sig.nextInt();
                 sig.nextLine();
 
-                for (int r = 0; r < jumlahBarangRusak; r++) {
+                for (int a = 0; a < jumlahBarangRusak; a++) {
                     System.out.println("|---------------------------------------| ");
-                    System.out.println("|Barang Rusak ke-" + (r + 1) + "           | ");
+                    System.out.println("|Barang Rusak ke-" + (a + 1) + "           | ");
                     System.out.println("|---------------------------------------| ");
                     System.out.println("|Masukan nama barang rusak  :           | ");
                     String namaBarangRusak = sig.nextLine();
                     System.out.println("|Masukan detail kerusakan   :           |");
                     String detailKerusakan = sig.nextLine();
+                    System.out.println("| Masukan jumlah Barang Rusak:          | ");
+                    int rusakBarang = sig.nextInt();
                     System.out.println("|=======================================|");
 
                     // Simpan data laporan barang rusak ke array laporanBarang
-                    laporanBarang[jumlahLaporan] = "Barang: " + namaBarangRusak + "\n Detail Kerusakan: "
-                            + detailKerusakan;
+                    laporanBarang[jumlahLaporan] = "Barang: " + namaBarangRusak + "\n Detail Kerusakan: " + detailKerusakan +"\n jumlah  kerusakan barang: " 
+                                +rusakBarang;
                     jumlahLaporan++;
                 }
 
@@ -388,10 +390,10 @@ public class SIGTA {
             System.out.println("|====================================================|");
 
             if (jumlahLaporan == 0) {
-                System.out.println("Tidak ada laporan yang tersimpan.");
+                System.out.println("Tidak ada laporan barang rusak yang tersimpan.");
             } else {
-                for (int i = 0; i < jumlahLaporan; i++) {
-                    System.out.println("Laporan " + (i + 1) + ": " + laporanBarang[i]);
+                for (int p = 0; p < jumlahLaporan; p++) {
+                    System.out.println("Laporan " + (p + 1) + ": " + laporanBarang[p]);
                     System.out.println("|====================================================|");
                 }
             }
