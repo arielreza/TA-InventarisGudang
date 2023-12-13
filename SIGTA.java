@@ -397,14 +397,12 @@
                         String namaBarangRusak = sig.nextLine();
                         System.out.println("|Masukan detail kerusakan   :           |");
                         String detailKerusakan = sig.nextLine();
-                        System.out.println("| Masukan jumlah Barang Rusak:          | ");
-                        int rusakBarang = sig.nextInt();
                         System.out.println("|=======================================|");
 
                         // Simpan data laporan barang rusak ke array laporanBarang
                         laporanBarang[jumlahLaporan] = "Barang: " + namaBarangRusak + "\n Detail Kerusakan: "
-                                + detailKerusakan + "\n jumlah  kerusakan barang: "
-                                + rusakBarang;
+                                + detailKerusakan;
+                                
                         jumlahLaporan++;
                     }
 
