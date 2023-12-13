@@ -1,4 +1,4 @@
-    import java.util.Scanner;
+import java.util.Scanner;
 
     public class SIGTA {
         static Scanner sig = new Scanner(System.in);
@@ -10,88 +10,49 @@
         static String[] namaBarang = new String[10];
         static String[] tipeBarang = new String[10]; // Sesuaikan ukuran array sesuai kebutuhan
         static int pemasukan[][] = new int[2][10];
+        static int rusakBarang[][] = new int [2][10];
         static int itemcount = 0;
         static int notaCounter = 1;
         static String[] laporanBarang = new String[20]; // Array untuk laporan
         static int jumlahLaporan = 0;
+        static int brgRsk = 1;
         static boolean isEnglish = true; // Flag untuk melacak bahasa yang dipilih
+        String bahasa;
 
         public static void main(String[] args) {
             while (true) {
-                tampilkanMenuBahasa();
-                int pilihanBahasa = sig.nextInt();
-                sig.nextLine();
-
-                if (pilihanBahasa == 1) {
-                    isEnglish = true;
-                } else if (pilihanBahasa == 2) {
-                    isEnglish = false;
-                } else {
-                    System.out.println("Pilihan bahasa tidak valid. Silakan coba lagi.");
-                    continue;
-                }
-
-                while (true) {
+            
                     showMenu();
                     int pilih = sig.nextInt();
                     sig.nextLine();
                     switchMenu(pilih);
                 }
             }
-        }
-
-        static void tampilkanMenuBahasa() {
-            System.out.println("|==============================|");
-            System.out.println("|     PILIH BAHASA ANDA        |");
-            System.out.println("|==============================|");
-            System.out.println("| 1. Inggris                   |");
-            System.out.println("| 2. Bahasa Indonesia          |");
-            System.out.println("|==============================|");
-            System.out.print("Silahkan Pilih bahasa Anda: ");
-        }
-
+    
         static void showMenu() {
+         
             System.out.println("|===========================================================|");
             System.out.println("|             SELAMAT DATANG DI INVENTARIS GUDANG           |");
             System.out.println("|===========================================================|");
             System.out.println("| Silahkan Pilih Menu :                                     |");
-            System.out.println("|----------------------                                     |");
+        System.out.println("|----------------------                                     |");
 
-                if (!registrationCompleted) {
-                    if (isEnglish) {
-                    System.out.println("|1. REGISTER USER                                           |");
-                    } else {
-                    System.out.println("|1. DAFTAR PENGGUNA                                         |");
-                    }
-                }
-                if (!loginuser) {
-                    if (isEnglish) {
-                    System.out.println("|2. LOGIN USER                                              |");
-                    } else {
-                    System.out.println("|2. LOGIN PENGGUNA                                          |");
-                    }
-                }
-            if (isEnglish) {
-                System.out.println("|3. Input Warehouse Data                                    |");
-                System.out.println("|4. Display Warehouse Data                                  |");
-                System.out.println("|5. Update Note                                             |");
-                System.out.println("|6. Search Item                                             |");
-                System.out.println("|7. Damaged Item Report / Note                              |");
-                System.out.println("|8. Display Damaged Item Report                             |");
-                System.out.println("|9. LOGOUT                                                  |");
-                System.out.println("|10. Exit                                                   |");
-            } else {
-                System.out.println("|3. Input data barang di Gudang                             |");
-                System.out.println("|4. Display data barang di Gudang                           |");
-                System.out.println("|5. Update Nota                                             |");
-                System.out.println("|6. Cari Barang                                             |");
-                System.out.println("|7. Laporan Barang Rusak / Catatan                          |");
-                System.out.println("|8. Tampilkan Laporan Barang Rusak                          |");
-                System.out.println("|9. LOGOUT                                                  |");
-                System.out.println("|10. Keluar                                                 |");
-            }
+        if (!registrationCompleted) {
+            System.out.println("|1. DAFTAR PENGGUNA                                         |");
+        }
+        if (!loginuser) {
+            System.out.println("|2. LOGIN PENGGUNA                                          |");
+        }
+            System.out.println("|3. Input data barang di Gudang                             |");
+            System.out.println("|4. Display data barang di Gudang                           |");
+            System.out.println("|5. Update Nota                                             |");
+            System.out.println("|6. Cari Barang                                             |");
+            System.out.println("|7. Laporan Barang Rusak / Catatan                          |");
+            System.out.println("|8. Tampilkan Laporan Barang Rusak                          |");
+            System.out.println("|9. LOGOUT                                                  |");
+            System.out.println("|10. Keluar                                                 |");
             System.out.println("|===========================================================|");
-            System.out.print("Pilih Menu: ");
+            System.out.println("Pilih Menu :");
         }
 
         static void switchMenu(int pilih) {
@@ -249,6 +210,7 @@
             }
         }
 
+
         static void displayDataBarang() {
             if (user == 0) {
                 System.out.println(" ");
@@ -397,14 +359,22 @@
                         String namaBarangRusak = sig.nextLine();
                         System.out.println("|Masukan detail kerusakan   :           |");
                         String detailKerusakan = sig.nextLine();
+                        System.out.println("| Masukan jumlah Barang Rusak:          | ");
+                        rusakBarang[1][itemcount + a] = sig.nextInt();
+                        sig.nextLine();
                         System.out.println("|=======================================|");
+
 
                         // Simpan data laporan barang rusak ke array laporanBarang
                         laporanBarang[jumlahLaporan] = "Barang: " + namaBarangRusak + "\n Detail Kerusakan: "
-                                + detailKerusakan;
-                                
+                                + detailKerusakan + "\n jumlah  kerusakan barang: "+ rusakBarang[1][itemcount + a];
                         jumlahLaporan++;
                     }
+
+                         System.out.println("Barang rusak berhasil di input");
+                    rusakBarang[1][itemcount] = jumlahBarangRusak;
+                    itemcount += jumlahBarangRusak; // Menambahkan jumlah barang yang baru dimasukkan ke itemcount
+                    brgRsk++;
 
                     System.out.println("Laporan Barang Rusak Berhasil Ditambah");
                     System.out.println("Apakah ada laporan barang rusak yang ingin anda tambahkan? (y/n)");
@@ -437,9 +407,11 @@
                     System.out.println("Tidak ada laporan barang rusak yang tersimpan.");
                 } else {
                     for (int p = 0; p < jumlahLaporan; p++) {
-                        System.out.println("Laporan " + (p + 1) + ": " + laporanBarang[p]);
                         System.out.println("|====================================================|");
+                      System.out.println("Laporan " + (p + 1) + ": " + laporanBarang[p]);
                     }
+
+                   
                 }
             }
 
