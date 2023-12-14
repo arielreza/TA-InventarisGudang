@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-    public class SIGTA {
+    public class SIGTA {    
         static Scanner sig = new Scanner(System.in);
         static int user = 0;
         static boolean registrationCompleted = false;
@@ -16,9 +16,12 @@ import java.util.Scanner;
         static String[] laporanBarang = new String[20]; // Array untuk laporan
         static int jumlahLaporan = 0;
         static int brgRsk = 1;
-        static boolean isEnglish = true; // Flag untuk melacak bahasa yang dipilih
-        String bahasa;
-
+        static int jumlahMasukTerbanyak = 0;
+        static String barangMasukTerbanyak;
+        static String barangKeluarTerbanyak;
+        static int jumlahKeluarTerbanyak = 0;
+        static int jumlahLaporanKeluar = 0;
+        static String [] laporanKeluar = new String[10];
         public static void main(String[] args) {
             while (true) {
             
@@ -173,6 +176,7 @@ import java.util.Scanner;
                     System.out.println(" ");
                     return;
                 }
+        
                 boolean dataBaru = true;
                 while (dataBaru) {
                     System.out.println("|=======================================|");
@@ -181,7 +185,7 @@ import java.util.Scanner;
                     System.out.println("|Jumlah barang yang akan dimasukkan:    |");
                     int jumlahBarang = sig.nextInt();
                     sig.nextLine();
-
+        
                     for (int r = 0; r < jumlahBarang; r++) {
                         System.out.println("|---------------------------------------| ");
                         System.out.println("|Barang ke-" + (r + 1) + "              | ");
@@ -194,13 +198,23 @@ import java.util.Scanner;
                         pemasukan[1][itemcount + r] = sig.nextInt();
                         sig.nextLine();
                         System.out.println("|=======================================|");
+        
+                        // Laporan barang masuk
+                        System.out.println("Laporan Barang Masuk:");
+                        System.out.println("Barang: " + namaBarang[itemcount + r] + " | Tipe Barang: " + tipeBarang[itemcount + r] + " | Jumlah: " + pemasukan[1][itemcount + r]);
+        
+                        // Memeriksa dan memperbarui barang masuk terbanyak
+                        if (pemasukan[1][itemcount + r] > jumlahMasukTerbanyak) {
+                            jumlahMasukTerbanyak = pemasukan[1][itemcount + r];
+                            barangMasukTerbanyak = namaBarang[itemcount + r];
+                        }
                     }
-
+        
                     System.out.println("Barang Berhasil Ditambah");
                     pemasukan[0][itemcount] = jumlahBarang;
                     itemcount += jumlahBarang; // Menambahkan jumlah barang yang baru dimasukkan ke itemcount
                     notaCounter++;
-
+        
                     System.out.println("Apakah ada barang yang ingin anda tambahkan? (y/n)");
                     char newData = sig.next().charAt(0);
                     if (newData == 'n') {
@@ -209,7 +223,7 @@ import java.util.Scanner;
                 }
             }
         }
-
+        
 
         static void displayDataBarang() {
             if (user == 0) {
@@ -255,7 +269,6 @@ import java.util.Scanner;
                 }
             }
         }
-
         static void updateNota() {
             if (user == 0) {
                 System.out.println(" ");
@@ -276,7 +289,7 @@ import java.util.Scanner;
                     System.out.println("Pilih nomor nota yang ingin diubah:        ");
                     int nomorNota = sig.nextInt();
                     sig.nextLine();
-
+        
                     int counter = 0;
                     int currentNota = 1;
                     while (counter < itemcount) {
@@ -284,25 +297,42 @@ import java.util.Scanner;
                             System.out.println("------------------------------------------------");
                             System.out.println("Data Barang pada nota ke-" + nomorNota + ":");
                             System.out.println("------------------------------------------------");
-
+        
                             int jumlahBarangNota = pemasukan[0][counter];
                             for (int r = 0; r < jumlahBarangNota; r++) {
                                 System.out.println((r + 1) + ". Nama Barang: " + namaBarang[counter]);
                                 System.out.println("Jumlah: " + pemasukan[1][counter]);
                                 counter++;
                             }
-
+        
                             System.out.println("------------------------------------------------");
                             System.out.println("Pilih nomor barang yang ingin diubah jumlahnya: ");
                             int nomorBarang = sig.nextInt();
-
+        
                             if (nomorBarang > 0 && nomorBarang <= jumlahBarangNota) {
                                 System.out.println("------------------------------------------------");
                                 System.out.println("Masukkan jumlah baru untuk barang "
                                         + namaBarang[counter - jumlahBarangNota + nomorBarang - 1] + ":");
                                 int jumlahBaru = sig.nextInt();
-
+        
                                 if (jumlahBaru >= 0) {
+                                    // Memeriksa apakah barang yang diubah adalah barang masuk atau barang keluar
+                                    boolean isBarangMasuk = counter - jumlahBarangNota + nomorBarang - 1 < itemcount;
+        
+                                    if (isBarangMasuk) {
+                                        // Menambahkan laporan barang keluar
+                                        laporanKeluar[jumlahLaporanKeluar] = "Barang Keluar: " + namaBarang[counter - jumlahBarangNota + nomorBarang - 1]
+                                                + "\n Jumlah: " + pemasukan[1][counter - jumlahBarangNota + nomorBarang - 1];
+                                        jumlahLaporanKeluar++;
+        
+                                        // Memeriksa dan memperbarui barang keluar terbanyak
+                                        if (pemasukan[1][counter - jumlahBarangNota + nomorBarang - 1] > jumlahKeluarTerbanyak) {
+                                            jumlahKeluarTerbanyak = pemasukan[1][counter - jumlahBarangNota + nomorBarang - 1];
+                                            barangKeluarTerbanyak = namaBarang[counter - jumlahBarangNota + nomorBarang - 1];
+                                        }
+                                    }
+        
+                                    // Memperbarui jumlah barang
                                     pemasukan[1][counter - jumlahBarangNota + nomorBarang - 1] = jumlahBaru;
                                     System.out.println("Jumlah barang berhasil diubah menjadi " + jumlahBaru);
                                     System.out.println("================================================");
@@ -319,7 +349,7 @@ import java.util.Scanner;
                         counter += jumlahBarangNota;
                         currentNota++;
                     }
-
+        
                     if (currentNota > nomorNota) {
                         System.out.println("Nomor nota tidak valid");
                     }
@@ -328,6 +358,7 @@ import java.util.Scanner;
                 }
             }
         }
+        
 
         static void laporanBarangRusak() {
             if (user == 0) {
@@ -398,16 +429,18 @@ import java.util.Scanner;
                     System.out.println(" ");
                     return;
                 }
-                System.out.println(" ");
-                System.out.println("|====================================================|");
-                System.out.println("|    LAPORAN BARANG RUSAK / CATATAN YANG TERSIMPAN   |");
-                System.out.println("|====================================================|");
+                System.out.println("|================================================================|");
+                System.out.println("|       LAPORAN BARANG RUSAK, MASUK, DAN KELUAR TERBANYAK        |");
+                System.out.println("|================================================================|");
+
+                     System.out.println("Barang Masuk Terbanyak: " + barangMasukTerbanyak + " (Jumlah: " + jumlahMasukTerbanyak + ")");
+                    System.out.println("Barang Keluar Terbanyak: " + barangKeluarTerbanyak + " (Jumlah: " + jumlahKeluarTerbanyak + ")");
 
                 if (jumlahLaporan == 0) {
                     System.out.println("Tidak ada laporan barang rusak yang tersimpan.");
                 } else {
                     for (int p = 0; p < jumlahLaporan; p++) {
-                        System.out.println("|====================================================|");
+                        System.out.println("|================================================================|");
                       System.out.println("Laporan " + (p + 1) + ": " + laporanBarang[p]);
                     }
 
@@ -487,3 +520,8 @@ import java.util.Scanner;
             loginuser = false;
         }
     }
+
+    //Buah delima di dalam pepaya
+    //Biji permata dari Belgia
+    //Usai sudah projek kita
+    //Akhir kata, semoga berbahagia.
